@@ -1,4 +1,6 @@
-export declare const h: Function;
+declare global {
+  const h: Function
+}
 
 export interface Props {
   [key: string]: any

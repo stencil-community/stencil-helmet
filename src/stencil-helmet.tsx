@@ -1,5 +1,5 @@
 import render from './render';
-import { VNode, Props, h } from './types';
+import { VNode, Props } from './types';
 
 const validTagNames = Object.keys(render);
 
