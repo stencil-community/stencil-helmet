@@ -1,10 +1,11 @@
 import render from './render';
-import { TAG_NAMES } from './constants';
 
 declare const h: Function;
 
+const validTagNames = Object.keys(render);
+
 const isValidNode = VNode =>
-  TAG_NAMES.indexOf(VNode.vtag) > -1;
+  validTagNames.indexOf(VNode.vtag) > -1;
 
 const renderToHead = VNode =>
   render[VNode.vtag](VNode);
