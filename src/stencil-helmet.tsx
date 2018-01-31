@@ -1,16 +1,17 @@
 import render from './render';
+import { VNode, Props } from './types';
 
 declare const h: Function;
 
 const validTagNames = Object.keys(render);
 
-const isValidNode = VNode =>
-  validTagNames.indexOf(VNode.vtag) > -1;
+const isValidNode = (node: VNode) =>
+  validTagNames.indexOf(node.vtag as string) > -1;
 
-const renderToHead = VNode =>
-  render[VNode.vtag](VNode);
+const renderToHead = (node: VNode) =>
+  render[node.vtag](node);
 
-const StencilHelmet = ({ children }: { [key: string]: any }) => {
+const StencilHelmet = ({ children }: Props) => {
   children
     .filter(isValidNode)
     .forEach(renderToHead);
