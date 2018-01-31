@@ -1,4 +1,4 @@
-import { createElement } from './dom';
+import { addElementToHead } from './dom';
 import { VNode } from './types';
 
 function title(node: VNode) {
@@ -11,12 +11,16 @@ function meta(node: VNode) {
   if (oldNode) {
     oldNode.setAttribute('content', content);
   } else {
-    const element = createElement(node.vtag, node.vattrs);
-    document.head.appendChild(element);
+    addElementToHead(node);
   }
+}
+
+function link(node: VNode) {
+  addElementToHead(node);
 }
 
 export default {
   title,
-  meta
+  meta,
+  link
 };
