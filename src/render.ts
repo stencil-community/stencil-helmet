@@ -7,7 +7,7 @@ function title(node: VNode) {
 
 function meta(node: VNode) {
   const { name, content } = node.vattrs;
-  const existingElement = document.querySelector(`meta [name="${name}"]`);
+  const existingElement = document.head.querySelector(`meta[name="${name}"]`);
   if (existingElement !== null) {
     existingElement.setAttribute('content', content);
   } else {
