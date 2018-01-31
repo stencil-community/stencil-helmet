@@ -1,4 +1,4 @@
-declare const h: Function;
+export declare const h: Function;
 
 export interface Props {
   [key: string]: any
