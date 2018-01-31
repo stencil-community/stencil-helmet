@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "module": "es2015",
+    "target": "es2015"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
