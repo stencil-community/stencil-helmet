@@ -1,3 +1,5 @@
+[![@stencil/helmet](https://img.shields.io/npm/v/@stencil/helmet.svg)](https://npm.im/@stencil/helmet)
+
 # Stencil Helmet
 
 > Declaratively update the `<head>` from a Stencil app.
