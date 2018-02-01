@@ -1,11 +1,11 @@
 import { addElementToHead } from './dom';
 import { VNode } from './types';
 
-function title(node: VNode) {
+export function title(node: VNode) {
   document.title = node.vchildren[0].vtext;
 }
 
-function meta(node: VNode) {
+export function meta(node: VNode) {
   const { name, content } = node.vattrs;
   const existingElement = document.head.querySelector(`meta[name="${name}"]`);
   if (existingElement !== null) {
@@ -15,17 +15,10 @@ function meta(node: VNode) {
   }
 }
 
-function link(node: VNode) {
+export function link(node: VNode) {
   addElementToHead(node);
 }
 
-function style(node: VNode) {
+export function style(node: VNode) {
   addElementToHead(node);
 }
-
-export default {
-  title,
-  meta,
-  link,
-  style
-};
