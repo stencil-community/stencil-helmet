@@ -9,12 +9,16 @@ export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
 
   const element = document.createElement(vtag as string);
 
-  for (const key in vattrs) {
-    element.setAttribute(key, vattrs[key]);
+  if (vattrs !== undefined) {
+    for (const key in vattrs) {
+      element.setAttribute(key, vattrs[key]);
+    }
   }
 
-  for (const child of vchildren) {
-    element.appendChild(createElement(child));
+  if (vchildren !== undefined) {
+    for (const child of vchildren) {
+      element.appendChild(createElement(child));
+    }
   }
 
   return element;
