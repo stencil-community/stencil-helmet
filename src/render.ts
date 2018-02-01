@@ -19,8 +19,13 @@ function link(node: VNode) {
   addElementToHead(node);
 }
 
+function style(node: VNode) {
+  addElementToHead(node);
+}
+
 export default {
   title,
   meta,
-  link
+  link,
+  style
 };
