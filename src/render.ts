@@ -1,15 +1,6 @@
+import { hasAttributes, hasChildren, isTextNode } from './util';
 import { addElementToHead } from './dom';
 import { VNode } from './types';
-
-const hasChildren = ({ vchildren }: VNode) =>
-  Array.isArray(vchildren);
-
-const hasAttributes = ({ vattrs }: VNode, requiredAttrs: string[] = []) =>
-  typeof vattrs === 'object' &&
-  requiredAttrs.every(vattrs.hasOwnProperty.bind(vattrs));
-
-const isTextNode = ({ vtext }: VNode) =>
-  typeof vtext === 'string';
 
 export function title(node: VNode) {
   if (hasChildren(node) && isTextNode(node.vchildren[0])) {
