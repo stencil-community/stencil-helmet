@@ -50,6 +50,5 @@ export function base(node: VNode) {
   }
 }
 
-export function template(node: VNode) {
-  addElementToHead(node);
-}
+export const template = addElementToHead;
+export const noscript = addElementToHead; // SSR only
