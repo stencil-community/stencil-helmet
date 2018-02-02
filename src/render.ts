@@ -49,3 +49,7 @@ export function base(node: VNode) {
     addElementToHead(node);
   }
 }
+
+export function template(node: VNode) {
+  addElementToHead(node);
+}
