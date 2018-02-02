@@ -1,8 +1,19 @@
 import { addElementToHead } from './dom';
 import { VNode } from './types';
 
+const hasChildren = ({ vchildren }: VNode) =>
+  Array.isArray(vchildren);
+
+const hasAttributes = ({ vattrs }: VNode) =>
+  typeof vattrs === 'object';
+
+const isTextNode = ({ vtext }: VNode) =>
+  typeof vtext === 'string';
+
 export function title(node: VNode) {
-  document.title = node.vchildren[0].vtext;
+  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    document.title = node.vchildren[0].vtext;
+  }
 }
 
 export function meta(node: VNode) {
@@ -16,9 +27,13 @@ export function meta(node: VNode) {
 }
 
 export function link(node: VNode) {
-  addElementToHead(node);
+  if (!hasChildren(node)) {
+    addElementToHead(node);
+  }
 }
 
 export function style(node: VNode) {
-  addElementToHead(node);
+  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    addElementToHead(node);
+  }
 }
