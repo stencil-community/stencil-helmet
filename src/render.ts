@@ -43,3 +43,9 @@ export function script(node: VNode) {
     addElementToHead(node);
   }
 }
+
+export function base(node: VNode) {
+  if (!hasChildren(node) && hasAttributes(node)) {
+    addElementToHead(node);
+  }
+}
