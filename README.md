@@ -6,7 +6,9 @@
 
 ---
 
-This is a [Stencil](https://github.com/ionic-team/stencil) component meant to be used within Stencil apps to declaratively update the document `<head>`. You pass it elements that you'd normally place in `<head>`, and it updates `<head>` accordingly. Each instance will override duplicate tags from preceding instances. It renders nothing, so it can only be used within a Stencil app, not as a standalone web component.
+This is a [Stencil](https://github.com/ionic-team/stencil) component meant to be used within Stencil apps to declaratively update the document `<head>`. You pass it elements that you'd normally place in `<head>`, and it updates `<head>` accordingly. Each instance will override duplicate tags from preceding instances.
+
+**Note** that, because it uses virtual DOM as input, stencil-helmet can only be used within Stencil apps and not as a standalone web component.
 
 ## Installation
 
@@ -34,5 +36,3 @@ export class MyComponent {
   }
 }
 ```
-
-**Note** that, because it uses virtual DOM as input, stencil-helmet can only be used within Stencil apps and not as a standalone web component.
