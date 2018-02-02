@@ -18,12 +18,13 @@ export function title(node: VNode) {
 }
 
 export function meta(node: VNode) {
-  const { name, content } = node.vattrs;
-  const existingElement = document.head.querySelector(`meta[name="${name}"]`);
-  if (existingElement !== null) {
-    existingElement.setAttribute('content', content);
-  } else {
-    addElementToHead(node);
+  if (hasAttributes(node, ['name', 'content'])) {
+    const existingElement = document.head.querySelector(`meta[name="${node.vattrs.name}"]`);
+    if (existingElement !== null) {
+      existingElement.setAttribute('content', node.vattrs.content);
+    } else {
+      addElementToHead(node);
+    }
   }
 }
 
