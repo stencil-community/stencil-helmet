@@ -37,3 +37,9 @@ export function style(node: VNode) {
     addElementToHead(node);
   }
 }
+
+export function script(node: VNode) {
+  if (hasChildren(node) || hasAttributes(node)) {
+    addElementToHead(node);
+  }
+}
