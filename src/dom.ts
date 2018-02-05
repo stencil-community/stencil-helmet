@@ -1,4 +1,5 @@
 import { VNode } from './types';
+import { isElement, isElementArray } from './util';
 
 const head = document.head;
 
@@ -26,3 +27,13 @@ export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
 
 export const addElementToHead = (node: VNode) =>
   head.appendChild(createElement(node));
+
+export const shouldApplyToHead = (val: any) =>
+  isElement(val) || isElementArray(val) && val.length === 2;
+
+export const applyToHead = (element: HTMLElement | HTMLElement[]) => {
+  if (Array.isArray(element)) {
+    return document.head.replaceChild.apply(document.head, element);
+  }
+  return document.head.appendChild(element);
+}
