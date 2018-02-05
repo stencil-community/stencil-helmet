@@ -1,8 +1,6 @@
 import { VNode } from './types';
 import { isElement, isElementArray } from './util';
 
-const head = document.head;
-
 export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
   if (vtext !== undefined) {
     return document.createTextNode(vtext);
@@ -24,9 +22,6 @@ export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
 
   return element;
 };
-
-export const addElementToHead = (node: VNode) =>
-  head.appendChild(createElement(node));
 
 export const shouldApplyToHead = (val: any) =>
   isElement(val) || isElementArray(val) && val.length === 2;

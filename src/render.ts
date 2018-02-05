@@ -1,47 +1,53 @@
 import { hasAttributes, hasChildren, isTextNode } from './util';
-import { addElementToHead } from './dom';
+import { createElement } from './dom';
 import { VNode } from './types';
 
-export function title(node: VNode) {
+export function title(node: VNode, head: HTMLElement) {
   if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    document.title = node.vchildren[0].vtext;
+    return [
+      createElement(node),
+      head.querySelector('title')
+    ];
   }
 }
 
-export function meta(node: VNode) {
+export function meta(node: VNode, head: HTMLElement) {
   if (hasAttributes(node, ['name', 'content'])) {
-    const existingElement = document.head.querySelector(`meta[name="${node.vattrs.name}"]`);
+    const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
     if (existingElement !== null) {
-      existingElement.setAttribute('content', node.vattrs.content);
+      return [
+        createElement(node),
+        existingElement
+      ];
     } else {
-      addElementToHead(node);
+      return createElement(node);
     }
   }
 }
 
 export function link(node: VNode) {
   if (!hasChildren(node)) {
-    addElementToHead(node);
+    return createElement(node);
   }
 }
 
 export function style(node: VNode) {
   if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    addElementToHead(node);
+    return createElement(node);
   }
 }
 
 export function script(node: VNode) {
   if (hasChildren(node) || hasAttributes(node)) {
-    addElementToHead(node);
+    return createElement(node);
   }
 }
 
 export function base(node: VNode) {
   if (!hasChildren(node) && hasAttributes(node)) {
-    addElementToHead(node);
+    return createElement(node);
   }
 }
 
-export const template = addElementToHead;
-export const noscript = addElementToHead; // SSR only
+export const template = createElement;
+export const noscript = createElement; // SSR only
