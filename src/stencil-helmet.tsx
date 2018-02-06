@@ -10,7 +10,7 @@ const isValidNode = (node: VNode) =>
 const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
 
-const StencilHelmet = ({ children = [] }: Props) => {
+export const Helmet = ({ children = [] }: Props) => {
   children
     .filter(isValidNode)
     .map(renderNode)
@@ -19,4 +19,4 @@ const StencilHelmet = ({ children = [] }: Props) => {
   return <span></span>; // return null once that's supported
 };
 
-export default StencilHelmet;
+export default Helmet;
