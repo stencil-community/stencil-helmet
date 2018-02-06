@@ -1,6 +1,6 @@
 {
   "name": "@stencil/helmet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Declaratively update the <head> from a Stencil app.",
   "main": "dist/stencil-helmet.js",
   "files": [
