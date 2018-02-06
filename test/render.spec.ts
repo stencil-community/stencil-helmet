@@ -53,3 +53,27 @@ describe('meta', () => {
       .toHaveLength(2);
   });
 });
+
+describe('link', () => {
+  const linkNode: VNode = {
+    vtag: 'link',
+    vattrs: {
+      name: 'foo',
+      content: 'bar'
+    }
+  };
+
+  it('should not render any children', () => {
+    expect(render.link({
+      ...linkNode,
+      vchildren: [{
+        vtag: 'span'
+      }]
+    })).toBeUndefined();
+  });
+
+  it('should render an element', () => {
+    expect(render.link(linkNode))
+      .toBeInstanceOf(HTMLElement);
+  });
+});
