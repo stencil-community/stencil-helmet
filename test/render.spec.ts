@@ -118,3 +118,26 @@ describe('script', () => {
     })).toBeInstanceOf(HTMLElement);
   });
 });
+
+describe('base', () => {
+  const baseNode = {
+    vtag: 'base',
+    vattrs: {
+      href: 'localhost'
+    }
+  };
+
+  it('should not render any children', () => {
+    expect(render.base({
+      ...baseNode,
+      vchildren: [{
+        vtag: 'span'
+      }]
+    })).toBeUndefined();
+  });
+
+  it('should render an element', () => {
+    expect(render.base(baseNode))
+      .toBeInstanceOf(HTMLElement);
+  });
+});
