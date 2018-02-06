@@ -141,3 +141,17 @@ describe('base', () => {
       .toBeInstanceOf(HTMLElement);
   });
 });
+
+describe('template', () => {
+  it('should render an element', () => {
+    expect(render.template({ vtag: 'template' }))
+      .toBeInstanceOf(HTMLElement);
+  });
+});
+
+describe('noscript', () => {
+  it('should render an element', () => {
+    expect(render.template({ vtag: 'noscript' }))
+      .toBeInstanceOf(HTMLElement);
+  });
+});
