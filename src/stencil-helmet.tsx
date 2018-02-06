@@ -10,7 +10,7 @@ const isValidNode = (node: VNode) =>
 const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
 
-const StencilHelmet = ({ children }: Props) => {
+const StencilHelmet = ({ children = [] }: Props) => {
   children
     .filter(isValidNode)
     .map(renderNode)
