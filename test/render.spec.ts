@@ -77,3 +77,24 @@ describe('link', () => {
       .toBeInstanceOf(HTMLElement);
   });
 });
+
+describe('style', () => {
+  const styleNode: VNode = {
+    vtag: 'style',
+    vchildren: [{
+      vtext: `body { color: blue; }`
+    }]
+  };
+
+  it('should only render text children', () => {
+    expect(render.style({
+      ...styleNode,
+      vchildren: null
+    })).toBeUndefined();
+  });
+
+  it('should render an elment', () => {
+    expect(render.style(styleNode))
+      .toBeInstanceOf(HTMLElement);
+  });
+});
