@@ -98,3 +98,23 @@ describe('style', () => {
       .toBeInstanceOf(HTMLElement);
   });
 });
+
+describe('script', () => {
+  const scriptNode = {
+    vtag: 'script'
+  };
+
+  it('should render inline scripts', () => {
+    expect(render.script({
+      ...scriptNode,
+      vchildren: [{ vtext: 'alert("foo")' }]
+    })).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should render external scripts', () => {
+    expect(render.script({
+      ...scriptNode,
+      vattrs: { src: '/script.js' }
+    })).toBeInstanceOf(HTMLElement);
+  });
+});
