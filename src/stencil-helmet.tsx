@@ -16,7 +16,7 @@ export const Helmet = ({ children = [] }: Props) => {
     .map(renderNode)
     .filter(shouldApplyToHead)
     .forEach(applyToHead);
-  return <span></span>; // return null once that's supported
+  return null;
 };
 
 export default Helmet;
