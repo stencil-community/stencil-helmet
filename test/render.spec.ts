@@ -32,7 +32,9 @@ describe('meta', () => {
     vattrs: {
       name: 'foo',
       content: 'bar'
-    }
+    },
+    vchildren: null,
+    vtext: null
   };
 
   it('should require name and content attributes', () => {
@@ -60,7 +62,9 @@ describe('link', () => {
     vattrs: {
       name: 'foo',
       content: 'bar'
-    }
+    },
+    vchildren: null,
+    vtext: null
   };
 
   it('should not render any children', () => {
@@ -83,7 +87,9 @@ describe('style', () => {
     vtag: 'style',
     vchildren: [{
       vtext: `body { color: blue; }`
-    }]
+    }],
+    vattrs: null,
+    vtext: null
   };
 
   it('should only render text children', () => {
@@ -101,7 +107,10 @@ describe('style', () => {
 
 describe('script', () => {
   const scriptNode = {
-    vtag: 'script'
+    vtag: 'script',
+    vchildren: null,
+    vattrs: null,
+    vtext: null
   };
 
   it('should render inline scripts', () => {
@@ -124,7 +133,9 @@ describe('base', () => {
     vtag: 'base',
     vattrs: {
       href: 'localhost'
-    }
+    },
+    vchildren: null,
+    vtext: null
   };
 
   it('should not render any children', () => {
@@ -143,15 +154,29 @@ describe('base', () => {
 });
 
 describe('template', () => {
+  const templateNode = {
+    vtag: 'template',
+    vattrs: null,
+    vchildren: null,
+    vtext: null
+  };
+
   it('should render an element', () => {
-    expect(render.template({ vtag: 'template' }))
+    expect(render.template(templateNode))
       .toBeInstanceOf(HTMLElement);
   });
 });
 
 describe('noscript', () => {
+  const noscriptNode = {
+    vtag: 'noscript',
+    vattrs: null,
+    vchildren: null,
+    vtext: null
+  };
+
   it('should render an element', () => {
-    expect(render.template({ vtag: 'noscript' }))
+    expect(render.template(noscriptNode))
       .toBeInstanceOf(HTMLElement);
   });
 });

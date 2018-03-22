@@ -8,7 +8,8 @@ const testVNode: VNode = {
   },
   vchildren: [{
     vtext: 'bar'
-  }]
+  }],
+  vtext: null
 };
 
 describe('createElement', () => {
