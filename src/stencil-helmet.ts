@@ -2,6 +2,8 @@ import * as render from './render';
 import { VNode, Props } from './types';
 import { shouldApplyToHead, applyToHead } from './dom';
 
+const headExists = document && document.head;
+
 const validTagNames = Object.keys(render);
 
 const isValidNode = (node: VNode) =>
@@ -11,11 +13,13 @@ const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
 
 export const Helmet = ({ children = [] }: Props) => {
-  children
-    .filter(isValidNode)
-    .map(renderNode)
-    .filter(shouldApplyToHead)
-    .forEach(applyToHead);
+  if (headExists) {
+    children
+      .filter(isValidNode)
+      .map(renderNode)
+      .filter(shouldApplyToHead)
+      .forEach(applyToHead);
+  }
   return null;
 };
 
