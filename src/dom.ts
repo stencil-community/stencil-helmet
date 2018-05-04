@@ -2,19 +2,19 @@ import { VNode } from './types';
 import { isElement, isElementArray } from './util';
 
 export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
-  if (vtext !== null) {
+  if (vtext != null) {
     return document.createTextNode(vtext);
   }
 
   const element = document.createElement(vtag as string);
 
-  if (vattrs !== null) {
+  if (vattrs != null) {
     for (const key in vattrs) {
       element.setAttribute(key, vattrs[key]);
     }
   }
 
-  if (vchildren !== null) {
+  if (vchildren != null) {
     for (const child of vchildren) {
       element.appendChild(createElement(child));
     }
