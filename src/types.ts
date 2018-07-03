@@ -3,6 +3,7 @@ declare global {
 }
 
 export interface Props {
+  children?: any[];
   [key: string]: any
 }
 
@@ -14,4 +15,15 @@ export interface VNode {
   vattrs?: any;
   vref?: (elm: any) => void;
   elm?: Element|Node;
+}
+
+export interface FunctionalUtilities {
+  getTag: (vnode: VNode) => string,
+  getChildren: (vnode: VNode) => VNode[],
+  getText: (vnode: VNode) => string,
+  getAttributes: (vnode: VNode) => any;
+  replaceAttributes: (vnode: VNode, attributes: any) => void;
+}
+export interface FunctionalComponent<PropsType> {
+  (props?: PropsType & Props, utils?: FunctionalUtilities): VNode;
 }

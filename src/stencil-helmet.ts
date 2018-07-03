@@ -1,24 +1,31 @@
-import * as render from './render';
-import { VNode, Props } from './types';
+import render from './render';
+import { VNode, Props, FunctionalComponent } from './types';
 import { shouldApplyToHead, applyToHead } from './dom';
 
-const headExists = document && document.head;
 
-const validTagNames = Object.keys(render);
+export const Helmet: FunctionalComponent<Props> = ({ children = [] }, fUtil) => {
+  const renderFns = render(fUtil);
+  const headExists = document && document.head;
 
-const isValidNode = (node: VNode) =>
-  validTagNames.indexOf(node.vtag as string) > -1;
+  const validTagNames = Object.keys(renderFns);
 
-const renderNode = (node: VNode) =>
-  render[node.vtag](node, document.head);
+  const isValidNode = (node: VNode) => {
+    const tagName = fUtil.getTag(node);
+    validTagNames.indexOf(tagName as string) > -1;
+  }
 
-export const Helmet = ({ children = [] }: Props) => {
+  const renderNode = (node: VNode) => {
+    const tagName = fUtil.getTag(node);
+    const currentAttributes = fUtil.getAttributes(node);
+    return renderFns[tagName](currentAttributes, document.head);
+  }
+
   if (headExists) {
     children
       .filter(isValidNode)
       .map(renderNode)
       .filter(shouldApplyToHead)
-      .forEach(applyToHead);
+      .forEach(applyToHead)
   }
   return null;
 };
