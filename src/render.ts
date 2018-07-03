@@ -1,53 +1,68 @@
-import { hasAttributes, hasChildren, isTextNode } from './util';
+import util from './util';
 import { createElement } from './dom';
-import { VNode } from './types';
+import { VNode, FunctionalUtilities } from './types';
 
-export function title(node: VNode, head: HTMLElement) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    return [
-      createElement(node),
-      head.querySelector('title')
-    ];
-  }
-}
+export default function render(fUtil: FunctionalUtilities) {
+  const { hasAttributes, hasChildren, isTextNode } = util(fUtil);
 
-export function meta(node: VNode, head: HTMLElement) {
-  if (hasAttributes(node, ['name', 'content'])) {
-    const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
-    if (existingElement !== null) {
+  function title(node: VNode, head: HTMLElement) {
+    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
       return [
-        createElement(node),
-        existingElement
+        createElement(node, fUtil),
+        head.querySelector('title')
       ];
-    } else {
-      return createElement(node);
     }
   }
-}
 
-export function link(node: VNode) {
-  if (!hasChildren(node)) {
-    return createElement(node);
+  function meta(node: VNode, head: HTMLElement) {
+    if (hasAttributes(node, ['name', 'content'])) {
+      const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
+      if (existingElement !== null) {
+        return [
+          createElement(node, fUtil),
+          existingElement
+        ];
+      } else {
+        return createElement(node, fUtil);
+      }
+    }
+  }
+
+  function link(node: VNode) {
+    if (!hasChildren(node)) {
+      return createElement(node, fUtil);
+    }
+  }
+
+  function style(node: VNode) {
+    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+      return createElement(node, fUtil);
+    }
+  }
+
+  function script(node: VNode) {
+    if (hasChildren(node) || hasAttributes(node)) {
+      return createElement(node, fUtil);
+    }
+  }
+
+  function base(node: VNode) {
+    if (!hasChildren(node) && hasAttributes(node)) {
+      return createElement(node, fUtil);
+    }
+  }
+
+  const template = (node) => createElement(node, fUtil);
+  const noscript = (node) => createElement(node, fUtil); // SSR only
+
+  return {
+    title,
+    meta,
+    link,
+    style,
+    script,
+    base,
+    template,
+    noscript
   }
 }
-
-export function style(node: VNode) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    return createElement(node);
-  }
-}
-
-export function script(node: VNode) {
-  if (hasChildren(node) || hasAttributes(node)) {
-    return createElement(node);
-  }
-}
-
-export function base(node: VNode) {
-  if (!hasChildren(node) && hasAttributes(node)) {
-    return createElement(node);
-  }
-}
-
-export const template = createElement;
-export const noscript = createElement; // SSR only

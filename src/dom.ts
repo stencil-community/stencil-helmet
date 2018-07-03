@@ -1,7 +1,12 @@
-import { VNode } from './types';
+import { VNode, FunctionalUtilities } from './types';
 import { isElement, isElementArray } from './util';
 
-export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
+export const createElement = (node: VNode, fUtil: FunctionalUtilities) => {
+  const vtag = fUtil.getTag(node);
+  const vtext = fUtil.getText(node);
+  const vattrs = fUtil.getAttributes(node);
+  const vchildren = fUtil.getChildren(node);
+
   if (vtext != null) {
     return document.createTextNode(vtext);
   }
@@ -16,7 +21,7 @@ export const createElement = ({ vtag, vattrs, vchildren, vtext }: VNode) => {
 
   if (vchildren != null) {
     for (const child of vchildren) {
-      element.appendChild(createElement(child));
+      element.appendChild(createElement(child, fUtil));
     }
   }
 
