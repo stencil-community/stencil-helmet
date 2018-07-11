@@ -11,7 +11,7 @@ export const Helmet: FunctionalComponent<Props> = ({ children = [] }, fUtil) => 
 
   const isValidNode = (node: VNode) => {
     const tagName = fUtil.getTag(node);
-    validTagNames.indexOf(tagName as string) > -1;
+    return validTagNames.indexOf(tagName as string) > -1;
   }
 
   const renderNode = (node: VNode) => {
