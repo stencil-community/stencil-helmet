@@ -9,7 +9,6 @@
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
-    "test": "jest",
     "prepublish": "npm run build"
   },
   "author": "Ionic Team",
