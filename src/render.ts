@@ -6,7 +6,7 @@ export default function render(fUtil: FunctionalUtilities) {
   const { hasAttributes, hasChildren, isTextNode } = util(fUtil);
 
   function title(node: VNode, head: HTMLElement) {
-    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    if (hasChildren(node) && isTextNode(fUtil.getChildren(node)[0])) {
       return [
         createElement(node, fUtil),
         head.querySelector('title')
@@ -35,7 +35,7 @@ export default function render(fUtil: FunctionalUtilities) {
   }
 
   function style(node: VNode) {
-    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    if (hasChildren(node) && isTextNode(fUtil.getChildren(node)[0])) {
       return createElement(node, fUtil);
     }
   }
