@@ -1,6 +1,6 @@
 {
   "name": "@stencil/helmet",
-  "version": "0.3.0-2",
+  "version": "0.2.5",
   "description": "Declaratively update the head from a Stencil app.",
   "main": "dist/stencil-helmet.js",
   "files": [
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
+    "test": "jest",
     "prepublish": "npm run build"
   },
   "author": "Ionic Team",
