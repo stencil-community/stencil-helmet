@@ -12,7 +12,7 @@ const isValidNode = (node: VNode) =>
 const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
 
-export const Helmet = ({ children = [] }: Props) => {
+export const Helmet = (props: Props, children = []) => {
   if (headExists) {
     children
       .filter(isValidNode)
