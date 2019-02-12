@@ -7,7 +7,7 @@ const headExists = document && document.head;
 const validTagNames = Object.keys(render);
 
 const isValidNode = (node: VNode) =>
-  validTagNames.indexOf(node.vtag as string) > -1;
+  node && validTagNames.indexOf(node.vtag as string) > -1;
 
 const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
