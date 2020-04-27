@@ -1,14 +1,15 @@
 import { createElement, shouldApplyToHead, applyToHead } from '../src/dom';
-import { VNode } from '../src/types';
 
-const testVNode: VNode = {
+import type { ChildNode } from '@stencil/core';
+
+const testVNode: ChildNode = {
   vtag: 'span',
   vattrs: {
     id: 'foo'
   },
   vchildren: [{
-    vtext: 'bar'
-  }],
+    $text$: 'bar'
+  } as any],
   vtext: null
 };
 

@@ -11,8 +11,8 @@ function title(node: ChildNode, head: HTMLElement) {
 
 function meta(node: ChildNode, head: HTMLElement) {
 
-  const namePropKey = node.vattrs.property ? 'property' : 'name';
-  const namePropValue = node.vattrs.property || node.vattrs.name;
+  const namePropKey = node.vattrs?.property ? 'property' : 'name';
+  const namePropValue = node.vattrs?.property || node.vattrs?.name;
 
   const existingElement = head.querySelector(`meta[${namePropKey}="${namePropValue}"]`);
   if (existingElement !== null) {
