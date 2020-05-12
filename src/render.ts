@@ -22,9 +22,19 @@ function meta(node: ChildNode, head: HTMLElement) {
   }
 }
 
-function link(node: ChildNode) {
+function link(node: ChildNode, head: HTMLElement) {
   if (!hasChildren(node)) {
-    return createElement(node);
+    const attrsSelector = Object.keys(node.vattrs)
+                                .filter(namePropKey => namePropKey !== "href")
+                                .map(namePropKey => `[${namePropKey}="${node.vattrs[namePropKey]}"]`)
+                                .join("");
+
+    const existingElement = head.querySelector(`link${attrsSelector}`);
+    if (existingElement !== null) {
+      return [createElement(node), existingElement];
+    } else {
+      return createElement(node);
+    }
   }
 }
 
