@@ -54,8 +54,9 @@ describe('link', () => {
   const linkNode: ChildNode = {
     vtag: 'link',
     vattrs: {
-      name: 'foo',
-      content: 'bar'
+      rel: 'alternate',
+      hreflang: 'en',
+      href: 'https://en.example.com/'
     },
     vchildren: null,
     vtext: null
@@ -71,7 +72,19 @@ describe('link', () => {
   });
 
   it('should render an element', () => {
-    expect(RenderTypes.link(linkNode))
+    expect(RenderTypes.link(linkNode, document.head))
+      .toBeInstanceOf(HTMLElement);
+  });
+
+  it('should return two elements with a match regardless of href', () => {
+    document.head.innerHTML = `<link rel="alternate" hreflang="en" href="https://en.example.com/page"/>`;
+    expect(RenderTypes.link(linkNode, document.head))
+      .toHaveLength(2);
+  });
+
+  it('should not return two elements if anything other than href differs', () => {
+    document.head.innerHTML = `<link rel="alternate" hreflang="es" href="https://es.example.com/page"/>`;
+    expect(RenderTypes.link(linkNode, document.head))
       .toBeInstanceOf(HTMLElement);
   });
 });
