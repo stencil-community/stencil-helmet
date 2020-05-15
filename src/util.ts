@@ -9,7 +9,8 @@ export const hasAttributes = ({ vattrs }: ChildNode, requiredAttrs: string[] = [
 
 export const isTextNode = ({ vtext }: ChildNode) => typeof vtext === 'string';
 
-export const isElement = (val: any) => !!val.nodeName;
+// Can't use instanceof HTMLElement because MockHTMLElement during pre-rendering isn't
+export const isElement = (val: any) => typeof val === 'object' && val.nodeType === 1 && typeof val.ownerDocument === 'object';
 
 export const isElementArray = (val: any) => Array.isArray(val) && val.every(isElement);
 
