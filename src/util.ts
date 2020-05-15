@@ -9,7 +9,7 @@ export const hasAttributes = ({ vattrs }: ChildNode, requiredAttrs: string[] = [
 
 export const isTextNode = ({ vtext }: ChildNode) => typeof vtext === 'string';
 
-export const isElement = (val: any) => val instanceof HTMLElement;
+export const isElement = (val: any) => !!val.nodeName;
 
 export const isElementArray = (val: any) => Array.isArray(val) && val.every(isElement);
 
