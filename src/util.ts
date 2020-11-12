@@ -1,4 +1,4 @@
-import type { ChildNode, VNode } from '@stencil/core';
+import type { ChildNode } from '@stencil/core';
 
 const isObject = (val: any) => !Array.isArray(val) && val !== null && typeof val === 'object';
 
