@@ -1,18 +1,9 @@
 import {
   hasAttributes,
-  hasChildren,
   isTextNode,
   isElement,
   isElementArray
 } from '../src/util';
-
-describe('hasChildren', () => {
-  it('checks that vchildren is an Array', () => {
-    expect(hasChildren({})).toBe(false);
-    expect(hasChildren({ vchildren: [] })).toBe(true);
-    expect(hasChildren({ vchildren: null })).toBe(false);
-  })
-});
 
 describe('hasAttributes', () => {
   it('checks that vattrs is an Object', () => {
