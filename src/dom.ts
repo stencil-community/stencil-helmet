@@ -1,7 +1,7 @@
-import { isElement, isElementArray, convertToPublic } from './util';
-import type { ChildNode } from '@stencil/core';
+import { isElement, isElementArray } from './util';
+import type { ChildNode, FunctionalUtilities } from '@stencil/core';
 
-export const createElement = ({ vtag, vattrs, vchildren, vtext }: ChildNode) => {
+export const createElement = ({ vtag, vattrs, vchildren, vtext }: ChildNode, utils: FunctionalUtilities) => {
   if (vtext != null) {
     return document.createTextNode(vtext);
   }
@@ -15,9 +15,9 @@ export const createElement = ({ vtag, vattrs, vchildren, vtext }: ChildNode) => 
   }
 
   if (vchildren != null) {
-    for (const child of vchildren) {
-      element.appendChild(createElement(convertToPublic(child)));
-    }
+    utils.forEach(vchildren, (child: ChildNode) => {
+      element.appendChild(createElement(child, utils));
+    });
   }
 
   return element;

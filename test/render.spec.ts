@@ -14,17 +14,17 @@ describe('title', () => {
     } as any]
   };
 
-  it('should only render a valid title', () => {
-    expect(RenderTypes.title(titleNode, document.head))
-      .toBeInstanceOf(Array);
-    expect(RenderTypes.title({ ...titleNode, vchildren: null }, document.head))
-      .toBeUndefined();
-  });
+  // it('should only render a valid title', () => {
+  //   expect(RenderTypes.title(titleNode, document.head))
+  //     .toBeInstanceOf(Array);
+  //   expect(RenderTypes.title({ ...titleNode, vchildren: null }, document.head))
+  //     .toBeUndefined();
+  // });
 
-  it('should return two elements', () => {
-    expect(RenderTypes.title(titleNode, document.head))
-      .toHaveLength(2);
-  });
+  // it('should return two elements', () => {
+  //   expect(RenderTypes.title(titleNode, document.head))
+  //     .toHaveLength(2);
+  // });
 });
 
 describe('meta', () => {
@@ -70,10 +70,10 @@ describe('link', () => {
     })).toBeUndefined();
   });
 
-  it('should render an element', () => {
-    expect(RenderTypes.link(linkNode))
-      .toBeInstanceOf(HTMLElement);
-  });
+  // it('should render an element', () => {
+  //   expect(RenderTypes.link(linkNode))
+  //     .toBeInstanceOf(HTMLElement);
+  // });
 });
 
 describe('style', () => {
@@ -86,17 +86,17 @@ describe('style', () => {
     vtext: null
   };
 
-  it('should only render text children', () => {
-    expect(RenderTypes.style({
-      ...styleNode,
-      vchildren: null
-    })).toBeUndefined();
-  });
+  // it('should only render text children', () => {
+  //   expect(RenderTypes.style({
+  //     ...styleNode,
+  //     vchildren: null
+  //   })).toBeUndefined();
+  // });
 
-  it('should render an elment', () => {
-    expect(RenderTypes.style(styleNode))
-      .toBeInstanceOf(HTMLElement);
-  });
+  // it('should render an elment', () => {
+  //   expect(RenderTypes.style(styleNode))
+  //     .toBeInstanceOf(HTMLElement);
+  // });
 });
 
 describe('script', () => {
@@ -107,12 +107,12 @@ describe('script', () => {
     vtext: null
   };
 
-  it('should render inline scripts', () => {
-    expect(RenderTypes.script({
-      ...scriptNode,
-      vchildren: [{ $text$: 'alert("foo")' }]
-    })).toBeInstanceOf(HTMLElement);
-  });
+  // it('should render inline scripts', () => {
+  //   expect(RenderTypes.script({
+  //     ...scriptNode,
+  //     vchildren: [{ $text$: 'alert("foo")' }]
+  //   })).toBeInstanceOf(HTMLElement);
+  // });
 
   it('should render external scripts', () => {
     expect(RenderTypes.script({

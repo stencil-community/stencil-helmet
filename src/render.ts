@@ -1,49 +1,61 @@
-import { convertToPublic, hasAttributes, hasChildren, isTextNode } from './util';
+import { hasAttributes, isTextNode } from './util';
 import { createElement } from './dom';
-import type { ChildNode } from '@stencil/core';
+import type { ChildNode, FunctionalUtilities, VNode } from '@stencil/core';
 
-function title(node: ChildNode, head: HTMLElement) {
-  const firstChild = (node.vchildren || [])[0];
-  if (hasChildren(node) && isTextNode(convertToPublic(firstChild))) {
-    return [createElement(node), head.querySelector('title')];
+const hasChildren = (node: ChildNode) => Array.isArray(node.vchildren);
+
+const getFirstChild = (vchildren: VNode[], utils: FunctionalUtilities) => {
+  let firstChild = null;
+  utils.forEach(vchildren || [], (c: ChildNode, i: number) => {
+    if (i === 0) {
+      firstChild = c;
+      return;
+    }
+  });
+  return firstChild;
+}
+
+function title(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
+  const firstChild = getFirstChild(node.vchildren || [], utils);
+  if (firstChild && isTextNode(firstChild)) {
+    return [createElement(node, utils), head.querySelector('title')];
   }
 }
 
-function meta(node: ChildNode, head: HTMLElement) {
-
+function meta(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
   const namePropKey = node.vattrs?.property ? 'property' : 'name';
   const namePropValue = node.vattrs?.property || node.vattrs?.name;
 
   const existingElement = head.querySelector(`meta[${namePropKey}="${namePropValue}"]`);
   if (existingElement !== null) {
-    return [createElement(node), existingElement];
+    return [createElement(node, utils), existingElement];
   } else {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-function link(node: ChildNode) {
+function link(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (!hasChildren(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-function style(node: ChildNode) {
-  const firstChild = (node.vchildren || [])[0];
-  if (hasChildren(node) && isTextNode(convertToPublic(firstChild))) {
-    return createElement(node);
+function style(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
+  const firstChild = getFirstChild(node.vchildren || [], utils);
+  if (firstChild && isTextNode(firstChild)) {
+    return createElement(node, utils);
   }
 }
 
-function script(node: ChildNode) {
+function script(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (hasChildren(node) || hasAttributes(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-function base(node: ChildNode) {
+function base(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (!hasChildren(node) && hasAttributes(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
