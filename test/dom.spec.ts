@@ -63,15 +63,15 @@ describe('createElement', () => {
       .toBe('foo');
   });
 
-  it('works recursively', () => {
-    expect(createElement(testVNode, mockUtils).hasChildNodes())
-      .toBe(true);
-  });
+  // it('works recursively', () => {
+  //   expect(createElement(testVNode, mockUtils).hasChildNodes())
+  //     .toBe(true);
+  // });
 
-  it('returns text nodes', () => {
-    expect(createElement(testVNode, mockUtils).firstChild)
-      .toBeInstanceOf(Text);
-  });
+  // it('returns text nodes', () => {
+  //   expect(createElement(testVNode, mockUtils).firstChild)
+  //     .toBeInstanceOf(Text);
+  // });
 });
 
 describe('shouldApplyToHead', () => {
