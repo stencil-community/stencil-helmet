@@ -24,9 +24,9 @@
     "url": "https://github.com/ionic-team/stencil-helmet"
   },
   "devDependencies": {
-    "@stencil/core": "^1.12.6",
-    "@types/jest": "^22.2.3",
-    "jest": "^25.4.0",
+    "@stencil/core": "^2.3.0",
+    "@types/jest": "26.0.5",
+    "jest": "26.6.3",
     "np": "^3.1.0",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
