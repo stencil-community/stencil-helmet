@@ -1,6 +1,6 @@
-import { hasAttributes, isTextNode } from './util';
-import { createElement } from './dom';
 import type { ChildNode, FunctionalUtilities, VNode } from '@stencil/core';
+import { createElement } from './dom';
+import { hasAttributes, isTextNode } from './util';
 
 const hasChildren = (node: ChildNode) => Array.isArray(node.vchildren);
 
@@ -23,8 +23,22 @@ function title(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
 }
 
 function meta(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
-  const namePropKey = node.vattrs?.property ? 'property' : 'name';
-  const namePropValue = node.vattrs?.property || node.vattrs?.name;
+  const namePropKey = (() => {
+    if (node.vattrs?.property) {
+      return 'property';
+    }
+
+    if (node.vattrs?.itemprop || node.vattrs?.itemProp) {
+      return 'itemprop';
+    }
+
+    if (node.vattrs?.httpequiv || node.vattrs?.httpEquiv) {
+      return 'httpequiv';
+    }
+
+    return 'name';
+  })();
+  const namePropValue = node.vattrs?.property || node.vattrs?.name || node.vattrs?.itemprop || node.vattrs?.itemProp || node.vattrs?.httpequiv || node.vattrs?.httpEquiv;
 
   const existingElement = head.querySelector(`meta[${namePropKey}="${namePropValue}"]`);
   if (existingElement !== null) {

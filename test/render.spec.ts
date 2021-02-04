@@ -1,6 +1,6 @@
 import type { ChildNode } from '@stencil/core';
-
 import RenderTypes from '../src/render';
+
 
 beforeEach(() => {
   document.head.innerHTML = '';
@@ -28,26 +28,76 @@ describe('title', () => {
 });
 
 describe('meta', () => {
-  const metaNode: ChildNode = {
-    vtag: 'meta',
-    vattrs: {
-      name: 'foo',
-      content: 'bar'
-    },
-    vchildren: null,
-    vtext: null
-  };
 
-  it('should return one element without a match', () => {
-    expect(RenderTypes.meta(metaNode, document.head))
-      .toBeInstanceOf(HTMLElement);
+  describe('name attribute', () => {
+    const metaNode: ChildNode = {
+      vtag: 'meta',
+      vattrs: {
+        name: 'foo',
+        content: 'bar'
+      },
+      vchildren: null,
+      vtext: null
+    };
+
+    it('should return one element without a match', () => {
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toBeInstanceOf(HTMLElement);
+    });
+
+    it('should return two elements with a match', () => {
+      document.head.innerHTML = `<meta name="foo" content="test"/>`;
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toHaveLength(2);
+    });
   });
 
-  it('should return two elements with a match', () => {
-    document.head.innerHTML = `<meta name="foo" content="test"/>`;
-    expect(RenderTypes.meta(metaNode, document.head))
-      .toHaveLength(2);
+  describe('itemprop attribute', () => {
+    const metaNode: ChildNode = {
+      vtag: 'meta',
+      vattrs: {
+        itemprop: 'foo',
+        content: 'bar'
+      },
+      vchildren: null,
+      vtext: null
+    };
+
+    it('should return one element without a match', () => {
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toBeInstanceOf(HTMLElement);
+    });
+
+    it('should return two elements with a match', () => {
+      document.head.innerHTML = `<meta itemprop="foo" content="test"/>`;
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toHaveLength(2);
+    });
   });
+
+  describe('httpequiv attribute', () => {
+    const metaNode: ChildNode = {
+      vtag: 'meta',
+      vattrs: {
+        httpequiv: 'foo',
+        content: 'bar'
+      },
+      vchildren: null,
+      vtext: null
+    };
+
+    it('should return one element without a match', () => {
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toBeInstanceOf(HTMLElement);
+    });
+
+    it('should return two elements with a match', () => {
+      document.head.innerHTML = `<meta httpequiv="foo" content="test"/>`;
+      expect(RenderTypes.meta(metaNode, document.head))
+        .toHaveLength(2);
+    });
+  });
+
 });
 
 describe('link', () => {
