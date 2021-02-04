@@ -24,7 +24,6 @@ export const Helmet = (_props: any, children: VNode[], utils: FunctionalUtilitie
     }
   });
 
-  console.log('RENDERING NODES', rendered, rendered.filter(shouldApplyToHead));
   // Build an HTMLElement for each provided virtual child
   rendered
     .filter(shouldApplyToHead)
