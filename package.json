@@ -1,8 +1,9 @@
 {
   "name": "@stencil/helmet",
-  "version": "0.2.5",
+  "version": "0.3.3-0",
   "description": "Declaratively update the head from a Stencil app.",
   "main": "dist/stencil-helmet.js",
+  "types": "dist/stencil-helmet.d.ts",
   "files": [
     "dist/"
   ],
@@ -23,11 +24,12 @@
     "url": "https://github.com/ionic-team/stencil-helmet"
   },
   "devDependencies": {
-    "@types/jest": "^22.1.1",
-    "jest": "^22.1.4",
-    "np": "^3.0.4",
-    "ts-jest": "^23.0.1",
-    "typescript": "^2.6.2"
+    "@stencil/core": "^2.3.0",
+    "@types/jest": "26.0.5",
+    "jest": "26.6.3",
+    "np": "^3.1.0",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
   },
   "jest": {
     "transform": {

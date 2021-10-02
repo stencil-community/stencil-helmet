@@ -1,53 +1,76 @@
-import { hasAttributes, hasChildren, isTextNode } from './util';
+import { hasAttributes, isTextNode } from './util';
 import { createElement } from './dom';
-import { VNode } from './types';
+import type { ChildNode, FunctionalUtilities, VNode } from '@stencil/core';
 
-export function title(node: VNode, head: HTMLElement) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    return [
-      createElement(node),
-      head.querySelector('title')
-    ];
-  }
-}
+const hasChildren = (node: ChildNode) => Array.isArray(node.vchildren);
 
-export function meta(node: VNode, head: HTMLElement) {
-  if (hasAttributes(node, ['name', 'content'])) {
-    const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
-    if (existingElement !== null) {
-      return [
-        createElement(node),
-        existingElement
-      ];
-    } else {
-      return createElement(node);
+const getFirstChild = (vchildren: VNode[], utils: FunctionalUtilities) => {
+  let firstChild = null;
+  utils.forEach(vchildren || [], (c: ChildNode, i: number) => {
+    if (i === 0) {
+      firstChild = c;
+      return;
     }
+  });
+  return firstChild;
+}
+
+function title(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
+  const firstChild = getFirstChild(node.vchildren || [], utils);
+  if (firstChild && isTextNode(firstChild)) {
+    return [createElement(node, utils), head.querySelector('title')];
   }
 }
 
-export function link(node: VNode) {
+function meta(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
+  const namePropKey = node.vattrs?.property ? 'property' : 'name';
+  const namePropValue = node.vattrs?.property || node.vattrs?.name;
+
+  const existingElement = head.querySelector(`meta[${namePropKey}="${namePropValue}"]`);
+  if (existingElement !== null) {
+    return [createElement(node, utils), existingElement];
+  } else {
+    return createElement(node, utils);
+  }
+}
+
+function link(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (!hasChildren(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-export function style(node: VNode) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
-    return createElement(node);
+function style(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
+  const firstChild = getFirstChild(node.vchildren || [], utils);
+  if (firstChild && isTextNode(firstChild)) {
+    return createElement(node, utils);
   }
 }
 
-export function script(node: VNode) {
+function script(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (hasChildren(node) || hasAttributes(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-export function base(node: VNode) {
+function base(node: ChildNode, _head: HTMLElement, utils: FunctionalUtilities) {
   if (!hasChildren(node) && hasAttributes(node)) {
-    return createElement(node);
+    return createElement(node, utils);
   }
 }
 
-export const template = createElement;
-export const noscript = createElement; // SSR only
+const template = createElement;
+const noscript = createElement; // SSR only
+
+const types = {
+  title,
+  meta,
+  link,
+  style,
+  script,
+  base,
+  template,
+  noscript,
+} as { [key: string]: any };
+
+export default types;

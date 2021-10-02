@@ -1,19 +1,13 @@
-import { VNode } from './types';
+import type { ChildNode } from '@stencil/core';
 
-const isObject = (val: any) =>
-  !Array.isArray(val) && val !== null && typeof val === 'object';
+const isObject = (val: any) => !Array.isArray(val) && val !== null && typeof val === 'object';
 
-export const hasChildren = ({ vchildren }: VNode) =>
-  Array.isArray(vchildren);
-
-export const hasAttributes = ({ vattrs }: VNode, requiredAttrs: string[] = []) =>
+export const hasAttributes = ({ vattrs }: ChildNode, requiredAttrs: string[] = []) =>
   isObject(vattrs) && requiredAttrs.every(vattrs.hasOwnProperty.bind(vattrs));
 
-export const isTextNode = ({ vtext }: VNode) =>
-  typeof vtext === 'string';
+export const isTextNode = ({ vtext }: ChildNode) => typeof vtext === 'string';
 
-export const isElement = (val: any) =>
-  val instanceof HTMLElement;
+// Can't use instanceof HTMLElement because MockHTMLElement during pre-rendering isn't
+export const isElement = (val: any) => typeof val === 'object' && val.nodeType === 1 && typeof val.ownerDocument === 'object';
 
-export const isElementArray = (val: any) =>
-  Array.isArray(val) && val.every(isElement);
+export const isElementArray = (val: any) => Array.isArray(val) && val.every(isElement);
