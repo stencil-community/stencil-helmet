@@ -1,5 +1,5 @@
 {
-  "name": "@stencil/helmet",
+  "name": "@stencil-community/helmet",
   "version": "0.3.3",
   "description": "Declaratively update the head from a Stencil app.",
   "main": "dist/stencil-helmet.js",
@@ -15,13 +15,13 @@
   },
   "author": "Ionic Team",
   "license": "MIT",
-  "homepage": "https://github.com/ionic-team/stencil-helmet",
+  "homepage": "https://github.com/stencil-community/stencil-helmet",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-helmet.git"
+    "url": "git+https://github.com/stencil-community/stencil-helmet.git"
   },
   "bugs": {
-    "url": "https://github.com/ionic-team/stencil-helmet"
+    "url": "https://github.com/stencil-community/stencil-helmet"
   },
   "devDependencies": {
     "@stencil/core": "^2.3.0",
