@@ -1,4 +1,4 @@
-[![@stencil/helmet](https://img.shields.io/npm/v/@stencil/helmet.svg)](https://npm.im/@stencil/helmet)
+[![@stencil-community/helmet](https://img.shields.io/npm/v/@stencil-community/helmet.svg)](https://npm.im/@stencil-community/helmet)
 
 # Stencil Helmet
 
@@ -13,13 +13,13 @@ This is a [Stencil](https://github.com/ionic-team/stencil) component meant to be
 ## Installation
 
 ```
-npm install @stencil/helmet
+npm install @stencil-community/helmet
 ```
 
 ## Usage
 
 ```jsx
-import Helmet from '@stencil/helmet';
+import Helmet from '@stencil-community/helmet';
 
 //...
 export class MyComponent {
