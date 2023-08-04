@@ -1,4 +1,3 @@
-[![CircleCI](https://img.shields.io/circleci/project/github/ionic-team/stencil-helmet/master.svg)](https://circleci.com/gh/ionic-team/stencil-helmet)
 [![@stencil/helmet](https://img.shields.io/npm/v/@stencil/helmet.svg)](https://npm.im/@stencil/helmet)
 
 # Stencil Helmet
