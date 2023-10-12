@@ -6,7 +6,7 @@ const headExists = document && document.head;
 
 const validTagNames = Object.keys(RenderTypes);
 
-const isValidNode = (node: ChildNode) => validTagNames.indexOf(node.vtag as string) > -1;
+const isValidNode = (node: ChildNode) => node && validTagNames.indexOf(node.vtag as string) > -1;
 
 const renderNode = (node: ChildNode, utils: FunctionalUtilities): HTMLElement => RenderTypes[node.vtag as string](node, document.head, utils);
 
