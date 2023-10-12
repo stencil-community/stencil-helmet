@@ -18,7 +18,12 @@ const getFirstChild = (vchildren: VNode[], utils: FunctionalUtilities) => {
 function title(node: ChildNode, head: HTMLElement, utils: FunctionalUtilities) {
   const firstChild = getFirstChild(node.vchildren || [], utils);
   if (firstChild && isTextNode(firstChild)) {
-    return [createElement(node, utils), head.querySelector('title')];
+    const existingElement = head.querySelector('title');
+    if (existingElement !== null) {
+      return [createElement(node, utils), existingElement];
+    } else {
+      return createElement(node, utils);
+    }
   }
 }
 
